@@ -1322,8 +1322,7 @@
       <a href="index.html#top" class="current-page">Home</a>
       <a href="services.html">Services</a>
       <a href="work.html">Work</a>
-      <a href="case-studies.html">Case Studies</a>
-      <a href="about.html">About</a>
+            <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-actions">
@@ -1339,7 +1338,6 @@
       <a href="index.html#top" class="current-page">Home</a>
       <a href="services.html">Services</a>
       <a href="work.html">Work</a>
-      <a href="case-studies.html">Case Studies</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <div class="mobile-ctas">
@@ -1821,43 +1819,48 @@
         </div>
       </div>
 
-      <form class="audit-form glass" id="auditForm" novalidate>
+      <form class="audit-form glass" id="auditForm" action="https://formspree.io/f/mjyvowkg" method="POST" novalidate>
         <div id="auditFields">
           <h3>Tell us what you're building.</h3>
           <p class="note">Takes about 60 seconds. We'll reach out with next steps.</p>
           <div class="field-row">
             <div class="field" data-required="true">
-              <label for="f-name">Name</label><input id="f-name" type="text" required />
+              <label for="f-name">Name</label><input id="f-name" name="name" type="text" required />
               <span class="field-error-msg">Enter your name.</span>
             </div>
             <div class="field" data-required="true">
-              <label for="f-business">Business</label><input id="f-business" type="text" required />
+              <label for="f-business">Business</label><input id="f-business" name="business" type="text" required />
               <span class="field-error-msg">Enter your business name.</span>
             </div>
           </div>
           <div class="field-row">
             <div class="field" data-required="true">
-              <label for="f-email">Email</label><input id="f-email" type="email" required />
+              <label for="f-email">Email</label><input id="f-email" name="email" type="email" required />
               <span class="field-error-msg">Enter a valid email.</span>
             </div>
             <div class="field" data-required="true">
-              <label for="f-phone">Phone</label><input id="f-phone" type="tel" required />
+              <label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" required />
               <span class="field-error-msg">Enter a phone number.</span>
             </div>
           </div>
           <div class="field-row">
-            <div class="field"><label for="f-website">Website (if any)</label><input id="f-website" type="text" /></div>
-            <div class="field"><label for="f-insta">Instagram (if any)</label><input id="f-insta" type="text" /></div>
+            <div class="field"><label for="f-website">Website (if any)</label><input id="f-website" name="website" type="text" /></div>
+            <div class="field"><label for="f-insta">Instagram (if any)</label><input id="f-insta" name="instagram" type="text" /></div>
           </div>
           <div class="field">
             <label for="f-industry">Industry</label>
-            <select id="f-industry">
+            <select id="f-industry" name="service">
               <option>Healthcare</option><option>Real Estate</option><option>Construction</option>
               <option>eCommerce</option><option>Professional Services</option><option>Local Business</option>
               <option>Startup</option><option>B2B</option><option>Other</option>
             </select>
           </div>
-          <div class="field"><label for="f-challenge">Biggest challenge</label><textarea id="f-challenge" rows="3"></textarea></div>
+          <div class="field"><label for="f-challenge">Biggest challenge</label><textarea id="f-challenge" name="message" rows="3"></textarea></div>
+          <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+            <label for="f-hp">Leave this field empty</label>
+            <input type="text" id="f-hp" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="form-error-msg" id="auditFormError" style="display:none; color:#c0392b; font-size:13px; margin-top:10px;"></p>
           <button type="submit" class="btn btn-primary">
             <span class="btn-label">Request My Audit <span class="btn-arrow">→</span></span>
             <span class="btn-spinner"><span class="spinner-ring"></span> Sending…</span>
@@ -2020,7 +2023,7 @@
       <div class="footer-col">
         <h5>Company</h5>
         <a href="index.html#top">Home</a><a href="services.html">Services</a><a href="work.html">Work</a>
-        <a href="case-studies.html">Case Studies</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a href="about.html">About</a><a href="contact.html">Contact</a>
         </div>
       <div class="footer-col">
         <h5>Services</h5>
@@ -2448,9 +2451,13 @@
     const fieldsPanel = document.getElementById('auditFields');
     const successPanel = document.getElementById('auditSuccess');
     const submitBtn = form.querySelector('button[type="submit"]');
+    const errorMsg = document.getElementById('auditFormError');
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
+
+      if(errorMsg){ errorMsg.style.display = 'none'; errorMsg.textContent = ''; }
+
       let valid = true;
       form.querySelectorAll('.field[data-required="true"]').forEach(field=>{
         const input = field.querySelector('input, select, textarea');
@@ -2467,12 +2474,33 @@
       if(!valid) return;
 
       submitBtn.classList.add('is-loading');
-      // Demo delay only — replace with a real fetch()/CRM call to go live.
-      setTimeout(()=>{
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response){
         submitBtn.classList.remove('is-loading');
-        fieldsPanel.style.display = 'none';
-        successPanel.classList.add('show');
-      }, 1100);
+        if(response.ok){
+          window.location.href = '/thank-you.html';
+        } else {
+          return response.json().then(function(data){
+            let message = 'Something went wrong while sending your enquiry. Please try again or contact us directly.';
+            if(data && data.errors && data.errors.length){
+              message = data.errors.map(function(err){ return err.message; }).join(', ');
+            }
+            throw new Error(message);
+          });
+        }
+      }).catch(function(err){
+        submitBtn.classList.remove('is-loading');
+        if(errorMsg){
+          errorMsg.textContent = err.message || 'Something went wrong while sending your enquiry. Please try again or contact us directly.';
+          errorMsg.style.display = 'block';
+        }
+      });
     });
   })();
 
