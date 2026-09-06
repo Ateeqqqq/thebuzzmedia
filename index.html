@@ -237,8 +237,8 @@
     border-bottom:1px solid var(--line-dark);
   }
   .mobile-menu a.current-page{ color:var(--orange); }
-  .mobile-menu .mobile-ctas{ display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
-  .mobile-menu .mobile-ctas .btn{ flex:1 1 140px; justify-content:center; white-space:normal; text-align:center; }
+  .mobile-menu .mobile-ctas{ display:flex; gap:10px; margin-top:24px; flex-wrap:nowrap; }
+  .mobile-menu .mobile-ctas .btn{ flex:1 1 0; justify-content:center; white-space:nowrap; text-align:center; padding:12px 16px; font-size:11px; letter-spacing:.08em; }
 
   @media (max-width: 920px){
     nav.primary-links{ display:none; }
@@ -533,8 +533,8 @@
     .hero h1{ font-size:clamp(22px, 7vw, 34px); }
     .hero-location{ font-size:10px; margin-bottom:14px; }
     .hero-desc{ font-size:14px; margin-bottom:18px; }
-    .hero-btns{ gap:10px; }
-    .hero-btns .btn{ padding:12px 14px; font-size:11px; }
+    .hero-btns{ gap:8px; flex-direction:column; }
+    .hero-btns .btn{ padding:10px 16px; font-size:11px; letter-spacing:.06em; width:fit-content; }
     .hero-visual{ height:220px; margin-top:0; }
     .eco-browser{ width:130px; }
     .eco-browser-body{ padding:10px 8px 12px; }
@@ -1786,6 +1786,7 @@
         </div>
         <div class="counter-cell">
           <div class="counter-num"><span class="count-target" data-target="96" data-suffix="%">0</span></div>
+          <div class="counter-label">Client retention rate across ongoing SEO, ads and lead generation retainers.</div>
         </div>
       </div>
     </div>
