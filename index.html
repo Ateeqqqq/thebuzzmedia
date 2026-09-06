@@ -60,7 +60,7 @@
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     font-family:var(--body);
     color:var(--black);
@@ -512,34 +512,41 @@
     0%,100%{ translate:0 0; } 50%{ translate:0 -6px; }
   }
 
-  /* ---- Tablet: simplified, no cursor-follow ---- */
+  /* ---- Tablet: side-by-side, simplified visual ---- */
   @media (max-width: 900px) and (min-width: 561px){
-    .hero-visual{ height:360px; margin-top:8px; }
-    .eco-browser{ width:200px; }
+    .hero .wrap{ grid-template-columns:1fr 1fr; gap:20px; padding-bottom:56px; align-items:center; }
+    .hero-visual{ height:300px; margin-top:0; }
+    .eco-browser{ width:180px; }
     .eco-node .label{ display:none; }
     .eco-node .dot{ width:7px; height:7px; }
-    .orbit-stage{ animation-duration:10s; }
-  }
-
-  /* ---- Mobile: idle animation only, reduced density ---- */
-  @media (max-width: 560px){
-    .hero-visual{ height:320px; margin-top:8px; }
-    .eco-browser{ width:172px; }
-    .eco-browser-body{ padding:12px 10px 14px; }
-    .eco-node .label{ display:none; }
-    .eco-node .dot{ width:6px; height:6px; }
-    .eco-card{ padding:7px 9px; }
-    .eco-card .eco-card-value{ font-size:13px; }
     .eco-card-reach, .eco-card-leads{ display:none; }
-    .orbit-stage{ animation-duration:11s; }
+    .orbit-stage{ animation-duration:10s; }
+    .hero-stats{ grid-template-columns:1fr; }
+    .hero-stats div{ border-right:none; border-bottom:1px solid var(--line-dark); padding:14px 0; }
+    .hero-stats div:last-child{ border-bottom:none; }
   }
 
-  /* ---- General responsive (original media query) ---- */
-  @media (max-width: 900px){
-    .hero .wrap{ grid-template-columns:1fr; padding-bottom:56px; }
-    .hero-stats{ grid-template-columns:1fr; }
-    .hero-stats div{ border-right:none; border-bottom:1px solid var(--line-dark); padding:16px 0; }
-    .hero-stats div:last-child{ border-bottom:none; }
+  /* ---- Mobile: side-by-side, minimal visual ---- */
+  @media (max-width: 560px){
+    .hero{ padding-top:96px; }
+    .hero .wrap{ grid-template-columns:1fr 1fr; gap:12px; padding-bottom:40px; align-items:center; }
+    .hero h1{ font-size:clamp(22px, 7vw, 34px); }
+    .hero-location{ font-size:10px; margin-bottom:14px; }
+    .hero-desc{ font-size:14px; margin-bottom:18px; }
+    .hero-btns{ gap:10px; }
+    .hero-btns .btn{ padding:12px 14px; font-size:11px; }
+    .hero-visual{ height:220px; margin-top:0; }
+    .eco-browser{ width:130px; }
+    .eco-browser-body{ padding:10px 8px 12px; }
+    .eco-node .label{ display:none; }
+    .eco-node .dot{ width:5px; height:5px; }
+    .eco-card{ padding:5px 7px; }
+    .eco-card .eco-card-label{ font-size:8px; }
+    .eco-card .eco-card-value{ font-size:12px; }
+    .eco-card-reach, .eco-card-leads{ display:none; }
+    .eco-card-roas{ right:0; }
+    .orbit-stage{ animation-duration:11s; }
+    .hero-stats{ display:none; }
   }
 
   /* ============ TECH STACK MARQUEE ============ */
