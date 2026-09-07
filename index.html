@@ -1262,51 +1262,78 @@
   /* ===== SCROLL-DRIVEN PROPORTIONAL SECTION MOTION ===== */
   section.sc-fade{ will-change:opacity, transform; }
 /* ============ HOME — PRICING (REAL PACKAGES, ELEVATED 3D CARDS) ============ */
-.home-pricing{ background:var(--white); padding:130px 0; position:relative; overflow:hidden; }
+.home-pricing{ background:var(--paper); padding:140px 0; position:relative; overflow:hidden; }
 .home-pricing .pricing-grid{
   display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:56px;
-  perspective:1600px;
+  align-items:stretch; perspective:1600px;
 }
 .home-pricing .price-card{
-  border:1px solid var(--line-light); border-radius:18px; padding:34px 30px 30px;
+  border:1px solid var(--line-light); border-radius:22px; padding:38px 32px 36px;
   display:flex; flex-direction:column; position:relative; background:var(--white);
-  transform-style:preserve-3d; will-change:transform;
+  transform-style:preserve-3d; will-change:transform; overflow:hidden;
   transition:transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s ease, border-color .35s ease;
   box-shadow:0 1px 2px rgba(17,17,17,0.04);
 }
+.home-pricing .price-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg, #cfcfcf, #9a9a9e);
+}
 .home-pricing .price-card:hover{
+  transform:translateY(-6px);
   border-color:var(--black);
   box-shadow:0 30px 60px -20px rgba(17,17,17,0.22), 0 10px 24px -8px rgba(17,17,17,0.1);
 }
 .home-pricing .price-card.featured{
   border-color:var(--orange); background:linear-gradient(180deg, var(--paper) 0%, var(--white) 60%);
+  box-shadow:0 20px 50px -18px rgba(255,90,0,0.18);
 }
+.home-pricing .price-card.featured::before{ background:linear-gradient(90deg, var(--orange), var(--orange-2)); height:5px; }
 .home-pricing .price-card.featured:hover{
-  box-shadow:0 34px 70px -18px rgba(255,90,0,0.28), 0 10px 26px -8px rgba(255,90,0,0.14);
+  transform:translateY(-10px) scale(1.015);
+  box-shadow:0 34px 70px -18px rgba(255,90,0,0.32), 0 10px 26px -8px rgba(255,90,0,0.16);
+}
+.home-pricing .price-card--enterprise{ background:linear-gradient(180deg, #fff 0%, #fafaf9 100%); }
+.home-pricing .price-card--enterprise::before{ background:linear-gradient(90deg, #2B2B2C, #6E6E73, #2B2B2C); }
+.home-pricing .price-card--enterprise:hover{
+  border-color:#2B2B2C;
+  box-shadow:0 30px 60px -20px rgba(17,17,17,0.28), 0 10px 24px -8px rgba(17,17,17,0.12);
 }
 .home-pricing .price-card .badge{
-  position:absolute; top:-13px; left:30px; background:var(--orange); color:#fff;
+  position:absolute; top:22px; right:22px; background:linear-gradient(100deg, var(--orange), var(--orange-2)); color:#fff;
   font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
-  padding:6px 14px; border-radius:20px; box-shadow:0 8px 16px -4px rgba(255,90,0,0.5);
+  padding:7px 14px; border-radius:20px; box-shadow:0 8px 18px -4px rgba(255,90,0,0.5);
 }
-.home-pricing .plan-tag{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--orange-dim); }
-.home-pricing .price-card h3{ font-size:22px; margin-top:8px; }
-.home-pricing .price-tag-note{ font-family:var(--body); font-size:13.5px; color:var(--ink-soft); margin-top:8px; line-height:1.5; min-height:40px; }
-.home-pricing .price-amount{ font-family:var(--display); font-weight:700; font-size:36px; margin-top:20px; display:flex; align-items:baseline; gap:6px; }
-.home-pricing .price-amount .cur{ font-size:19px; color:var(--orange); }
-.home-pricing .price-amount .per{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); font-weight:400; }
-.home-pricing .price-card > .btn{ margin-top:22px; justify-content:center; }
-.home-pricing .price-features{ margin-top:26px; display:flex; flex-direction:column; flex:1; }
-.home-pricing .price-features div{ font-size:13.5px; color:#3f3f3f; padding:10px 2px; border-top:1px solid var(--line-light); display:flex; gap:10px; line-height:1.4; }
-.home-pricing .price-features div:first-child{ border-top:none; }
-.home-pricing .price-features div::before{ content:"✓"; color:var(--orange); flex-shrink:0; font-family:var(--mono); font-weight:600; }
-.home-pricing .price-delivery{
-  margin-top:18px; padding-top:16px; border-top:1px dashed var(--line-light);
-  font-family:var(--mono); font-size:11px; color:var(--orange-dim); letter-spacing:.03em;
-  display:flex; align-items:center; gap:8px;
+.home-pricing .price-card-head{ display:flex; align-items:center; gap:10px; }
+.home-pricing .plan-icon{
+  display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
+  border-radius:10px; background:var(--paper); border:1px solid var(--line-light);
+  font-size:16px; color:var(--orange); flex-shrink:0;
 }
-.home-pricing-footnote{ margin-top:48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px; }
-.home-pricing-footnote p{ font-size:13.5px; color:var(--ink-soft); }
+.home-pricing .price-card--enterprise .plan-icon{ color:#2B2B2C; }
+.home-pricing .price-card.featured .plan-icon{ background:#fff; border-color:rgba(255,106,0,0.3); }
+.home-pricing .plan-tag{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--orange-dim); font-weight:600; }
+.home-pricing .price-card--enterprise .plan-tag{ color:#2B2B2C; }
+.home-pricing .price-card h3{ font-size:34px; margin-top:22px; font-family:var(--display); font-weight:700; letter-spacing:-0.01em; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+.home-pricing .price-onwards{ font-size:13px; font-weight:500; color:var(--ink-soft); font-family:var(--body); text-transform:uppercase; letter-spacing:.03em; }
+.home-pricing .price-custom{ color:var(--black); }
+.home-pricing .price-tag-note{ font-family:var(--body); font-size:13.5px; color:var(--ink-soft); margin-top:10px; line-height:1.55; min-height:44px; }
+.home-pricing .price-card > .btn{ margin-top:24px; justify-content:center; border-radius:12px; padding:14px 20px; font-weight:600; }
+.home-pricing .price-card > .btn.btn-outline{ border-width:1.5px; }
+.home-pricing .price-card > .btn.btn-outline:hover{ background:var(--black); color:#fff; border-color:var(--black); }
+.home-pricing .price-card--enterprise > .btn.btn-outline:hover{ background:#2B2B2C; }
+.home-pricing .price-features{ margin-top:28px; padding-top:22px; border-top:1px solid var(--line-light); display:flex; flex-direction:column; flex:1; gap:2px; }
+.home-pricing .price-features div{ font-size:13.5px; color:#3f3f3f; padding:9px 2px; display:flex; gap:10px; line-height:1.45; align-items:flex-start; }
+.home-pricing .price-features div::before{
+  content:"✓"; flex-shrink:0; font-family:var(--mono); font-weight:700; font-size:10.5px; color:#fff;
+  background:var(--orange); width:17px; height:17px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+  margin-top:2px;
+}
+.home-pricing .price-card--enterprise .price-features div::before{ background:#2B2B2C; }
+.home-pricing-footnote{
+  margin-top:52px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px;
+  background:var(--white); border:1px solid var(--line-light); border-radius:18px; padding:26px 30px;
+}
+.home-pricing-footnote p{ font-size:14px; color:var(--ink-soft); max-width:520px; line-height:1.5; }
 @media (max-width:980px){ .home-pricing .pricing-grid{ grid-template-columns:1fr; max-width:460px; margin-left:auto; margin-right:auto; perspective:none; } }
 .needs-input{ font-family:var(--mono); font-size:10.5px; color:var(--orange); letter-spacing:.03em; }
 </style>
@@ -1792,6 +1819,230 @@
     </div>
   </section>
 
+  <!-- WORK SHOWCASE -->
+  <section class="work-showcase" id="work-showcase">
+    <div class="ws-aurora ws-aurora--1"></div>
+    <div class="ws-aurora ws-aurora--2"></div>
+    <div class="ws-aurora ws-aurora--3"></div>
+    <div class="ws-noise" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="ws-head">
+        <div>
+          <div class="ws-badge"><span class="ws-badge-dot"></span>15+ Live Projects Shipped</div>
+          <h2 class="ws-title">See what we've<br>already <span class="ws-title-accent">shipped<span class="ws-title-dot">.</span></span></h2>
+        </div>
+        <a href="work.html" class="ws-cta">
+          <span>Explore Full Portfolio</span>
+          <span class="ws-cta-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="ws-marquee-wrap">
+      <a class="ws-row-link" href="work.html" aria-label="View all client work">
+        <div class="ws-row ws-row--a">
+          <div class="ws-track">
+            <div class="ws-card" style="--accent:#FF6A00;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">01</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Personal Brand</span><h3>Ateeq.dev</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#2563EB;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">02</span></div><div class="ws-visual"><span class="ws-mono">F</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Flippy</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#10B981;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">03</span></div><div class="ws-visual"><span class="ws-mono">Z</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Healthcare</span><h3>Z-Line Fitness &amp; Rehab</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#6366F1;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">04</span></div><div class="ws-visual"><span class="ws-mono">P</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Real Estate</span><h3>Property Mates Pvt Ltd</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#06B6D4;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">05</span></div><div class="ws-visual"><span class="ws-mono">N</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · SaaS</span><h3>Nexus Document Parser</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#F43F5E;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">06</span></div><div class="ws-visual"><span class="ws-mono">C</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Chandana Kollections</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <!-- duplicate for seamless loop -->
+            <div class="ws-card" aria-hidden="true" style="--accent:#FF6A00;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">01</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Personal Brand</span><h3>Ateeq.dev</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#2563EB;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">02</span></div><div class="ws-visual"><span class="ws-mono">F</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Flippy</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#10B981;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">03</span></div><div class="ws-visual"><span class="ws-mono">Z</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Healthcare</span><h3>Z-Line Fitness &amp; Rehab</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#6366F1;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">04</span></div><div class="ws-visual"><span class="ws-mono">P</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Real Estate</span><h3>Property Mates Pvt Ltd</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#06B6D4;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">05</span></div><div class="ws-visual"><span class="ws-mono">N</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · SaaS</span><h3>Nexus Document Parser</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#F43F5E;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">06</span></div><div class="ws-visual"><span class="ws-mono">C</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Chandana Kollections</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+          </div>
+        </div>
+
+        <div class="ws-row ws-row--b">
+          <div class="ws-track ws-track--rev">
+            <div class="ws-card" style="--accent:#EAB308;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">07</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · B2B</span><h3>Advanced Tailoring</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#EC4899;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">08</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Ameerah</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#3B82F6;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">09</span></div><div class="ws-visual"><span class="ws-mono">P</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Real Estate</span><h3>PropCity</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#22C55E;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">10</span></div><div class="ws-visual"><span class="ws-mono">S</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Nonprofit</span><h3>SIR Foundation</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#A855F7;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">11</span></div><div class="ws-visual"><span class="ws-mono">O</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Education</span><h3>Omatic Educational Overseas</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" style="--accent:#F97316;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">12</span></div><div class="ws-visual"><span class="ws-mono">M</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Momin Mart</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <!-- duplicate for seamless loop -->
+            <div class="ws-card" aria-hidden="true" style="--accent:#EAB308;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">07</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · B2B</span><h3>Advanced Tailoring</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#EC4899;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">08</span></div><div class="ws-visual"><span class="ws-mono">A</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Ameerah</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#3B82F6;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">09</span></div><div class="ws-visual"><span class="ws-mono">P</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Real Estate</span><h3>PropCity</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#22C55E;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">10</span></div><div class="ws-visual"><span class="ws-mono">S</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Nonprofit</span><h3>SIR Foundation</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#A855F7;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">11</span></div><div class="ws-visual"><span class="ws-mono">O</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · Education</span><h3>Omatic Educational Overseas</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+            <div class="ws-card" aria-hidden="true" style="--accent:#F97316;"><div class="ws-card-top"><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-dot"></span><span class="ws-num">12</span></div><div class="ws-visual"><span class="ws-mono">M</span></div><div class="ws-body"><span class="ws-tag"><i></i>Website · eCommerce</span><h3>Momin Mart</h3><span class="ws-view">View Case<span class="ws-arrow-circle">↗</span></span></div></div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="wrap">
+      <p class="ws-foot">15+ live projects across healthcare, real estate, eCommerce, education &amp; more — <a href="work.html">browse the full case study library →</a></p>
+    </div>
+  </section>
+
+  <style>
+    /* ============ WORK SHOWCASE ============ */
+    .work-showcase{
+      position:relative; background:var(--black); color:var(--white);
+      padding:120px 0 90px; overflow:hidden; isolation:isolate;
+    }
+    .ws-noise{
+      position:absolute; inset:0; z-index:0; opacity:.05; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .ws-aurora{ position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none; z-index:0; opacity:.55; }
+    .ws-aurora--1{ width:640px; height:520px; top:-260px; left:-120px; background:radial-gradient(circle, rgba(255,106,0,0.55) 0%, rgba(255,106,0,0) 70%); animation:wsFloat1 16s ease-in-out infinite; }
+    .ws-aurora--2{ width:560px; height:480px; top:-160px; right:-160px; background:radial-gradient(circle, rgba(37,99,235,0.45) 0%, rgba(37,99,235,0) 70%); animation:wsFloat2 20s ease-in-out infinite; }
+    .ws-aurora--3{ width:500px; height:420px; bottom:-260px; left:38%; background:radial-gradient(circle, rgba(168,85,247,0.35) 0%, rgba(168,85,247,0) 70%); animation:wsFloat1 24s ease-in-out infinite reverse; }
+    @keyframes wsFloat1{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(40px,30px); } }
+    @keyframes wsFloat2{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-40px,25px); } }
+
+    .ws-head{ position:relative; z-index:2; display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:70px; }
+    .ws-badge{
+      display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px;
+      letter-spacing:.06em; text-transform:uppercase; color:var(--orange-2);
+      border:1px solid rgba(255,138,61,0.35); background:rgba(255,106,0,0.08);
+      padding:7px 14px 7px 10px; border-radius:99px; margin-bottom:20px;
+    }
+    .ws-badge-dot{ width:7px; height:7px; border-radius:50%; background:var(--orange); box-shadow:0 0 0 0 rgba(255,106,0,.6); animation:wsPulse 2s infinite; }
+    @keyframes wsPulse{ 0%{ box-shadow:0 0 0 0 rgba(255,106,0,.55); } 70%{ box-shadow:0 0 0 8px rgba(255,106,0,0); } 100%{ box-shadow:0 0 0 0 rgba(255,106,0,0); } }
+    .ws-title{
+      font-family:var(--display); font-weight:700; color:var(--white);
+      font-size:clamp(32px,4.6vw,56px); line-height:1.05; letter-spacing:-0.01em;
+    }
+    .ws-title-accent{ color:var(--orange); background:linear-gradient(90deg, var(--orange) 0%, var(--orange-2) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .ws-title-dot{ -webkit-text-fill-color:var(--orange); }
+
+    .ws-cta{
+      position:relative; flex-shrink:0; display:inline-flex; align-items:center; gap:10px;
+      font-family:var(--body); font-weight:600; font-size:15px; color:#111;
+      background:linear-gradient(100deg, var(--orange) 0%, var(--orange-2) 100%);
+      padding:16px 26px; border-radius:99px; white-space:nowrap; overflow:hidden;
+      box-shadow:0 12px 30px rgba(255,106,0,0.3);
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .ws-cta::before{
+      content:""; position:absolute; inset:0; background:linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+      transform:translateX(-120%) skewX(-15deg); transition:transform .6s ease;
+    }
+    .ws-cta:hover{ transform:translateY(-3px); box-shadow:0 16px 38px rgba(255,106,0,0.42); }
+    .ws-cta:hover::before{ transform:translateX(220%) skewX(-15deg); }
+    .ws-cta-arrow{ display:inline-flex; transition:transform .3s ease; }
+    .ws-cta:hover .ws-cta-arrow{ transform:translate(3px,-3px); }
+
+    .ws-marquee-wrap{ position:relative; z-index:2; }
+    .ws-row-link{ display:block; cursor:pointer; }
+    .ws-marquee-wrap::before, .ws-marquee-wrap::after{
+      content:""; position:absolute; top:0; bottom:0; width:min(180px,15vw); z-index:3; pointer-events:none;
+    }
+    .ws-marquee-wrap::before{ left:0; background:linear-gradient(90deg, var(--black) 0%, transparent 100%); }
+    .ws-marquee-wrap::after{ right:0; background:linear-gradient(270deg, var(--black) 0%, transparent 100%); }
+
+    .ws-row{ overflow:hidden; width:100%; padding:16px 0; }
+    .ws-row--a{ transform:rotate(1.6deg) scale(1.04); margin-bottom:6px; }
+    .ws-row--b{ transform:rotate(-1.6deg) scale(1.04); }
+
+    .ws-track{ display:flex; gap:22px; width:max-content; animation:wsScrollLeft 46s linear infinite; }
+    .ws-track--rev{ animation-name:wsScrollRight; animation-duration:52s; }
+    .ws-row-link:hover .ws-track{ animation-play-state:paused; }
+
+    @keyframes wsScrollLeft{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+    @keyframes wsScrollRight{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
+
+    .ws-card{
+      flex:0 0 auto; width:270px;
+      background:#141415; border-radius:20px; overflow:hidden;
+      border:1px solid var(--line-dark);
+      box-shadow:0 10px 24px rgba(0,0,0,0.35);
+      transition:transform .4s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .4s ease;
+    }
+    .ws-card:hover{
+      transform:translateY(-10px) scale(1.035);
+      border-color:var(--accent);
+      box-shadow:0 26px 55px -12px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent) inset;
+    }
+    .ws-card-top{
+      display:flex; align-items:center; gap:6px; padding:13px 16px;
+      background:#0e0e0f; border-bottom:1px solid var(--line-dark);
+    }
+    .ws-dot{ width:8px; height:8px; border-radius:50%; background:#3a3a3c; }
+    .ws-dot:nth-child(1){ background:#ff5f57; }
+    .ws-dot:nth-child(2){ background:#febc2e; }
+    .ws-dot:nth-child(3){ background:#28c840; }
+    .ws-num{ margin-left:auto; font-family:var(--mono); font-size:10px; color:#5a5a5e; letter-spacing:.05em; }
+
+    .ws-visual{
+      position:relative; height:110px; display:flex; align-items:center; justify-content:center;
+      background:
+        linear-gradient(155deg, color-mix(in srgb, var(--accent) 32%, #141415) 0%, color-mix(in srgb, var(--accent) 8%, #141415) 70%);
+      overflow:hidden;
+    }
+    .ws-visual::before{
+      content:""; position:absolute; inset:0;
+      background-image:repeating-linear-gradient(115deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 14px);
+    }
+    .ws-visual::after{
+      content:""; position:absolute; width:140px; height:140px; border-radius:50%;
+      background:var(--accent); opacity:.35; filter:blur(30px); right:-30px; bottom:-40px;
+      transition:transform .5s ease, opacity .5s ease;
+    }
+    .ws-card:hover .ws-visual::after{ transform:scale(1.3); opacity:.55; }
+    .ws-mono{
+      position:relative; z-index:1; font-family:var(--display); font-weight:700; font-size:44px;
+      color:color-mix(in srgb, var(--accent) 88%, white 12%);
+      text-shadow:0 4px 18px rgba(0,0,0,.35);
+      transition:transform .4s ease;
+    }
+    .ws-card:hover .ws-mono{ transform:scale(1.12) rotate(-4deg); }
+
+    .ws-body{ padding:20px 20px 22px; display:flex; flex-direction:column; gap:14px; }
+    .ws-tag{
+      display:inline-flex; align-items:center; gap:7px; width:fit-content;
+      font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+      color:#a9a9ad;
+    }
+    .ws-tag i{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+    .ws-card h3{ font-family:var(--display); font-size:19px; font-weight:600; color:var(--white); line-height:1.25; min-height:48px; }
+    .ws-view{
+      font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+      color:#7a7a7e; display:inline-flex; align-items:center; justify-content:space-between; gap:8px;
+      padding-top:12px; border-top:1px solid var(--line-dark);
+    }
+    .ws-arrow-circle{
+      width:26px; height:26px; border-radius:50%; border:1px solid #3a3a3c;
+      display:inline-flex; align-items:center; justify-content:center; font-size:12px; color:#9a9a9e;
+      transition:all .35s cubic-bezier(.2,.8,.2,1);
+    }
+    .ws-card:hover .ws-view{ color:#d5d5d8; }
+    .ws-card:hover .ws-arrow-circle{
+      background:var(--accent); border-color:var(--accent); color:#111;
+      transform:rotate(45deg) scale(1.08);
+      box-shadow:0 0 20px color-mix(in srgb, var(--accent) 60%, transparent);
+    }
+
+    .ws-foot{ position:relative; z-index:2; margin-top:60px; color:var(--ink-soft-dark); font-size:15px; }
+    .ws-foot a{ color:var(--orange-2); border-bottom:1px solid rgba(255,138,61,0.4); }
+    .ws-foot a:hover{ color:var(--orange); border-color:var(--orange); }
+
+    @media (max-width: 720px){
+      .work-showcase{ padding:80px 0 64px; }
+      .ws-head{ margin-bottom:44px; }
+      .ws-card{ width:220px; }
+      .ws-visual{ height:90px; }
+      .ws-mono{ font-size:34px; }
+      .ws-row--a, .ws-row--b{ transform:none; }
+      .ws-cta{ padding:14px 20px; font-size:14px; }
+    }
+    @supports not (background: color-mix(in srgb, red, blue)){
+      .ws-visual{ background:linear-gradient(155deg, var(--accent) 0%, #141415 85%); }
+      .ws-mono{ color:#fff; }
+      .ws-card:hover{ box-shadow:0 26px 55px -12px rgba(0,0,0,.5); }
+    }
+  </style>
 
   <div class="seam" style="background:var(--paper);" aria-hidden="true">
     <svg viewBox="0 0 1200 64" preserveAspectRatio="none">
@@ -1908,8 +2159,11 @@
 
       <div class="pricing-grid">
         <div class="price-card reveal-item" id="pc-starter">
-          <span class="plan-tag">Starter</span>
-          <h3>₹6,999 <span style="font-size:14px; font-weight:400; color:var(--ink-soft); font-family:var(--body);">onwards</span></h3>
+          <div class="price-card-head">
+            <span class="plan-icon">◐</span>
+            <span class="plan-tag">Starter</span>
+          </div>
+          <h3>₹6,999 <span class="price-onwards">onwards</span></h3>
           <p class="price-tag-note">Static website for new Hyderabad businesses — delivered in 24 hours.</p>
           <a href="contact.html" class="btn btn-outline">Get Starter Package</a>
           <div class="price-features">
@@ -1926,13 +2180,15 @@
             <div>Google Analytics 4 setup &amp; Search Console ready</div>
             <div>2 content revision rounds · 30-day post-launch support</div>
           </div>
-          <div class="price-delivery">⚡ Delivered in 24 hours</div>
         </div>
 
         <div class="price-card featured reveal-item" id="pc-business">
-          <span class="badge">Most Chosen</span>
-          <span class="plan-tag">Business</span>
-          <h3>₹12,999 <span style="font-size:14px; font-weight:400; color:var(--ink-soft); font-family:var(--body);">onwards</span></h3>
+          <span class="badge">★ Most Chosen</span>
+          <div class="price-card-head">
+            <span class="plan-icon">◑</span>
+            <span class="plan-tag">Business</span>
+          </div>
+          <h3>₹12,999 <span class="price-onwards">onwards</span></h3>
           <p class="price-tag-note">Dynamic CMS website for growing brands — delivered in 48 hours.</p>
           <a href="contact.html" class="btn btn-primary">Get Business Package</a>
           <div class="price-features">
@@ -1948,17 +2204,19 @@
             <div>Auto-responder emails on form submissions</div>
             <div>3 revision rounds + hands-on CMS training for your team</div>
           </div>
-          <div class="price-delivery">⚡ Delivered in 48 hours · priority WhatsApp support</div>
         </div>
 
-        <div class="price-card reveal-item" id="pc-ecommerce">
-          <span class="plan-tag">eCommerce</span>
-          <h3>₹24,999 <span style="font-size:14px; font-weight:400; color:var(--ink-soft); font-family:var(--body);">onwards</span></h3>
-          <p class="price-tag-note">Full online store for Hyderabad retailers — delivered in 3 days.</p>
-          <a href="contact.html" class="btn btn-outline">Get Ecommerce Quote</a>
+        <div class="price-card price-card--enterprise reveal-item" id="pc-ecommerce">
+          <div class="price-card-head">
+            <span class="plan-icon">◈</span>
+            <span class="plan-tag">eCommerce</span>
+          </div>
+          <h3 class="price-custom">Custom <span class="price-onwards">pricing</span></h3>
+          <p class="price-tag-note">Full online store, scoped to your catalog, features &amp; growth plans — no fixed ceiling.</p>
+          <a href="contact.html" class="btn btn-outline">Get a Custom Quote</a>
           <div class="price-features">
             <div>WooCommerce store setup with custom storefront design</div>
-            <div>Up to 50 products — categories, filters &amp; search</div>
+            <div>Product catalog sized to your inventory — no fixed cap</div>
             <div>1 year free domain + high-speed hosting with SSL</div>
             <div>10 professional email accounts on your domain</div>
             <div>Razorpay gateway — UPI, cards, net banking &amp; wallets</div>
@@ -1969,7 +2227,6 @@
             <div>Google Analytics ecommerce + conversion tracking</div>
             <div>Admin training, documentation &amp; full handover</div>
           </div>
-          <div class="price-delivery">⚡ Delivered in 3 days · ongoing maintenance available</div>
         </div>
       </div>
 
