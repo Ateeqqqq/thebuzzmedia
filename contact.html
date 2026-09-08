@@ -20,8 +20,8 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thebuzzmedia.in/" },
-    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://thebuzzmedia.in/contact" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thebuzzmedia.co.in/" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://thebuzzmedia.co.in/contact" }
   ]
 }
 </script>
@@ -1375,13 +1375,14 @@ nav.primary-links a.current-page::after{ width:100%; }
         submitBtn.disabled = false;
         fieldsPanel.style.display = 'none';
         successPanel.classList.add('show');
+        window.location.href = '/thank-you.html';
 
       } catch(error) {
         submitBtn.classList.remove('is-loading');
         submitBtn.disabled = false;
         alert(error.message || 'Something went wrong. Please try again.');
       }
-    }););
+    });
   })();
 
 </script>
